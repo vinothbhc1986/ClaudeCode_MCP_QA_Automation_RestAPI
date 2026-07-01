@@ -1,32 +1,47 @@
-const ERROR_MESSAGES = {
-  invalidId: {
-    pattern: /invalid/i,
-    description: 'Invalid ID format provided',
-  },
-  orderNotFound: {
-    pattern: /order.*not found|not found.*order/i,
-    description: 'Order does not exist',
-  },
-  productNotFound: {
-    pattern: /product.*not found|not found.*product/i,
-    description: 'Product does not exist',
-  },
-  missingRequiredFields: {
-    pattern: /required|missing|must not be null/i,
-    description: 'Required fields are missing from request body',
-  },
-  invalidPriceValue: {
-    pattern: /price.*invalid|invalid.*price|price.*positive|must be greater/i,
-    description: 'Price value is invalid (negative, zero, or wrong type)',
-  },
-  invalidQuantity: {
-    pattern: /quantity.*invalid|invalid.*quantity|quantity.*positive|must be greater/i,
-    description: 'Quantity value is invalid (zero, negative, or wrong type)',
-  },
-  insufficientStock: {
-    pattern: /insufficient stock|out of stock|not enough/i,
-    description: 'Not enough stock to fulfill the order',
-  },
-};
+class ErrorMessages {
+  static productNotFound(id) {
+    return `Product not found: ${id}`;
+  }
 
-module.exports = { ERROR_MESSAGES };
+  static invalidProductIdFormat(id) {
+    return `Invalid product ID format: ${id}`;
+  }
+
+  static orderNotFound(id) {
+    return `Order not found: ${id}`;
+  }
+
+  static invalidOrderIdFormat(id) {
+    return `Invalid order ID format: ${id}`;
+  }
+
+  static insufficientStock(name, available, requested) {
+    return `Insufficient stock for ${name}. Available: ${available}, Requested: ${requested}`;
+  }
+
+  static get PRICE_MUST_BE_POSITIVE() {
+    return 'Price must be greater than 0';
+  }
+
+  static get QUANTITY_MIN() {
+    return 'Quantity must be at least 1';
+  }
+
+  static get PRODUCT_ID_REQUIRED() {
+    return 'productId: productId is required';
+  }
+
+  static get QUANTITY_REQUIRED() {
+    return 'quantity: quantity is required';
+  }
+
+  static get NEW_PRICE_REQUIRED() {
+    return 'newPrice: newPrice is required';
+  }
+
+  static get INVALID_REQUEST_BODY() {
+    return 'Invalid request body or data type';
+  }
+}
+
+module.exports = { ErrorMessages };
