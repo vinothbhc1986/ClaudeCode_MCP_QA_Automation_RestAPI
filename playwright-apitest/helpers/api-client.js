@@ -1,39 +1,21 @@
-const { request } = require('playwright');
-const { ENDPOINTS } = require('../testdata/api-endpoints');
+import { endpoints } from '../testdata/api-endpoints.js';
 
-class ApiClient {
-  constructor(requestContext) {
-    this.request = requestContext;
-  }
-
-  async getAllProducts() {
-    return this.request.get(ENDPOINTS.products());
-  }
-
-  async getInventoryById(productId) {
-    return this.request.get(ENDPOINTS.inventory(productId));
-  }
-
-  async createOrder(payload) {
-    return this.request.post(ENDPOINTS.orders(), {
-      data: payload,
-    });
-  }
-
-  async updateProductPrice(payload) {
-    return this.request.put(ENDPOINTS.priceUpdate(), {
-      data: payload,
-    });
-  }
-
-  async deleteOrder(orderId) {
-    return this.request.delete(ENDPOINTS.orderById(orderId));
-  }
-
-  static async create() {
-    const ctx = await request.newContext();
-    return new ApiClient(ctx);
-  }
+export async function getAllProducts(request) {
+  return request.get(endpoints.getAllProducts());
 }
 
-module.exports = { ApiClient };
+export async function getInventoryById(request, productId) {
+  return request.get(endpoints.getInventoryById(productId));
+}
+
+export async function createOrder(request, payload) {
+  return request.post(endpoints.createOrder(), { data: payload });
+}
+
+export async function updateProductPrice(request, payload) {
+  return request.put(endpoints.updateProductPrice(), { data: payload });
+}
+
+export async function deleteOrder(request, orderId) {
+  return request.delete(endpoints.deleteOrder(orderId));
+}

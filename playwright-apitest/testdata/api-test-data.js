@@ -1,107 +1,40 @@
-const VALID_PRODUCT_ID = 'PROD-001';
-const VALID_PRODUCT_ID_LOW_STOCK = 'PROD-008';
-const VALID_PRODUCT_ID_OUT_OF_STOCK = 'PROD-012';
-const VALID_PRODUCT_ID_LOW_STOCK_2 = 'PROD-019';
-const NON_EXISTENT_PRODUCT_ID = 'PROD-999';
-const INVALID_PRODUCT_ID_FORMATS = ['INVALID', 'PROD-00', '123', 'ABC-123', ''];
+export const validProductIds = ['PROD-001', 'PROD-002', 'PROD-003'];
+export const nonExistentProductId = 'PROD-999';
+export const invalidProductIdFormat = 'INVALID';
 
-const VALID_ORDER_ID = 'ORD-00001';
-const NON_EXISTENT_ORDER_ID = 'ORD-99999';
-const INVALID_ORDER_ID_FORMATS = ['INVALID', 'ORD-000', '123', ''];
+export const validOrderId = 'ORD-00001';
+export const nonExistentOrderId = 'ORD-99999';
+export const invalidOrderIdFormat = 'INVALID';
 
-const TEST_PRODUCT = {
-  productId: VALID_PRODUCT_ID,
-  name: 'Wireless Bluetooth Headphones',
-  price: 79.99,
-  stockStatus: 'IN_STOCK',
-  category: 'Electronics',
-  quantity: 61234150,
-};
-
-const TEST_INVENTORY = {
-  productId: VALID_PRODUCT_ID,
-  productName: 'Wireless Bluetooth Headphones',
-  stockStatus: 'IN_STOCK',
-  quantity: 61234150,
-};
-
-const VALID_ORDER_REQUEST = {
-  productId: VALID_PRODUCT_ID,
+export const validOrderPayload = {
+  productId: 'PROD-001',
   quantity: 2,
 };
 
-const INVALID_ORDER_MISSING_PRODUCT_ID = {
-  quantity: 2,
+export const invalidOrderPayload = {
+  productId: 'INVALID',
+  quantity: -5,
 };
 
-const INVALID_ORDER_MISSING_QUANTITY = {
-  productId: VALID_PRODUCT_ID,
+export const partialOrderPayload = {
+  productId: 'PROD-001',
 };
 
-const INVALID_ORDER_ZERO_QUANTITY = {
-  productId: VALID_PRODUCT_ID,
-  quantity: 0,
+export const validPriceUpdatePayload = {
+  productId: 'PROD-001',
+  newPrice: 29.99,
 };
 
-const INVALID_ORDER_WRONG_PRODUCT_ID = {
-  productId: NON_EXISTENT_PRODUCT_ID,
-  quantity: 1,
-};
-
-const VALID_PRICE_UPDATE_REQUEST = {
-  productId: VALID_PRODUCT_ID,
-  newPrice: 89.99,
-};
-
-const INVALID_PRICE_UPDATE_MISSING_PRODUCT_ID = {
-  newPrice: 89.99,
-};
-
-const INVALID_PRICE_UPDATE_MISSING_PRICE = {
-  productId: VALID_PRODUCT_ID,
-};
-
-const INVALID_PRICE_UPDATE_NEGATIVE_PRICE = {
-  productId: VALID_PRODUCT_ID,
+export const invalidPriceUpdatePayload = {
+  productId: 'PROD-001',
   newPrice: -10,
 };
 
-const INVALID_PRICE_UPDATE_ZERO_PRICE = {
-  productId: VALID_PRODUCT_ID,
-  newPrice: 0,
+export const partialPriceUpdatePayload = {
+  productId: 'PROD-001',
 };
 
-const INVALID_PRICE_UPDATE_WRONG_PRODUCT_ID = {
-  productId: NON_EXISTENT_PRODUCT_ID,
-  newPrice: 50,
-};
-
-const NEW_PRICE = 89.99;
-const OLD_PRICE = 79.99;
-
-module.exports = {
-  VALID_PRODUCT_ID,
-  VALID_PRODUCT_ID_LOW_STOCK,
-  VALID_PRODUCT_ID_OUT_OF_STOCK,
-  VALID_PRODUCT_ID_LOW_STOCK_2,
-  NON_EXISTENT_PRODUCT_ID,
-  INVALID_PRODUCT_ID_FORMATS,
-  VALID_ORDER_ID,
-  NON_EXISTENT_ORDER_ID,
-  INVALID_ORDER_ID_FORMATS,
-  TEST_PRODUCT,
-  TEST_INVENTORY,
-  VALID_ORDER_REQUEST,
-  INVALID_ORDER_MISSING_PRODUCT_ID,
-  INVALID_ORDER_MISSING_QUANTITY,
-  INVALID_ORDER_ZERO_QUANTITY,
-  INVALID_ORDER_WRONG_PRODUCT_ID,
-  VALID_PRICE_UPDATE_REQUEST,
-  INVALID_PRICE_UPDATE_MISSING_PRODUCT_ID,
-  INVALID_PRICE_UPDATE_MISSING_PRICE,
-  INVALID_PRICE_UPDATE_NEGATIVE_PRICE,
-  INVALID_PRICE_UPDATE_ZERO_PRICE,
-  INVALID_PRICE_UPDATE_WRONG_PRODUCT_ID,
-  NEW_PRICE,
-  OLD_PRICE,
+export const nonExistentPriceUpdatePayload = {
+  productId: 'PROD-999',
+  newPrice: 49.99,
 };

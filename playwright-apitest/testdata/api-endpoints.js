@@ -1,11 +1,9 @@
-const BASE_URL = process.env.BASE_URL || 'http://localhost:8082';
+const BASE_URL = 'http://localhost:8082';
 
-const ENDPOINTS = {
-  products:        () => `${BASE_URL}/api/products`,
-  inventory:       (productId) => `${BASE_URL}/api/inventory/${productId}`,
-  orders:          () => `${BASE_URL}/api/orders`,
-  priceUpdate:     () => `${BASE_URL}/api/products/price-update`,
-  orderById:       (orderId) => `${BASE_URL}/api/orders/${orderId}`,
+export const endpoints = {
+  getAllProducts: () => `${BASE_URL}/api/products`,
+  getInventoryById: (productId) => `${BASE_URL}/api/inventory/${productId}`,
+  createOrder: () => `${BASE_URL}/api/orders`,
+  updateProductPrice: () => `${BASE_URL}/api/products/price-update`,
+  deleteOrder: (orderId) => `${BASE_URL}/api/orders/${orderId}`,
 };
-
-module.exports = { BASE_URL, ENDPOINTS };

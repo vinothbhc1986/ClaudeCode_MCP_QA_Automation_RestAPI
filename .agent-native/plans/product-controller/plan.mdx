@@ -1,0 +1,80 @@
+---
+title: ProductController — Document-First Plan
+slug: product-controller
+created: 2026-07-03
+mode: local-files
+---
+
+## Summary
+
+This local plan documents the review, potential enhancements, and test coverage for the backend controller `ProductController.java` in `product-api`.
+
+## Context
+
+- File: product-api/src/main/java/com/example/productapi/controller/ProductController.java
+- Current behavior: single `GET /api/products` endpoint returning `List<Product>` via `ProductService.getAllProducts()`.
+
+## Goals
+
+- Verify behavior and edge cases for `GET /api/products`.
+- Propose minimal, low-risk improvements and required tests.
+- Identify touched files for implementation and testing.
+
+## Findings
+
+- `ProductController` is simple and delegates to `ProductService`.
+- No pagination, filtering, or explicit error handling in the controller.
+- Unit and integration tests should exist or be added for the endpoint and service.
+
+## Recommended Minimal Deliverables (first cut)
+
+1. Add unit tests for `ProductController#getAllProducts()` that:
+   - Mock `ProductService` and assert the controller returns 200 and expected body.
+   - Verify controller maps empty service result to 200 with empty list.
+
+2. Add integration test(s) (Spring Boot test) that:
+   - Start the `product-api` context and call `/api/products` expecting JSON array matching `data/products.json` or seeded data.
+
+3. Define improvements to consider (deferred):
+   - Pagination and `page`/`size` query params.
+   - Filtering by category/name.
+   - Add OpenAPI documentation (Swagger annotations).
+
+## Files to Create / Modify
+
+- Add tests under product-api/src/test/java/...:
+  - ProductControllerTest.java (unit)
+  - ProductControllerIntegrationTest.java (integration)
+- Verify product-api/src/main/resources/data/products.json used for seeded data.
+
+## Open Questions
+
+1. Do you want pagination/filtering in the first iteration? (recommended: defer)
+2. Should integration tests use the existing `data/products.json` fixture or a test-specific dataset?
+
+## Next Steps (after your approval)
+
+1. I will implement the unit and integration tests listed above.
+2. If tests pass, optionally implement pagination endpoints and add OpenAPI annotations.
+
+---
+question-form:
+  id: product-controller-questions
+  title: Approval and choices
+  questions:
+    - id: pagination
+      title: Enable pagination now?
+      mode: single
+      options:
+        - id: defer
+          label: Defer (recommended)
+        - id: implement
+          label: Implement now
+    - id: integration-fixture
+      title: Use data/products.json for integration tests?
+      mode: single
+      options:
+        - id: use_fixture
+          label: Use existing fixture
+        - id: create_test_data
+          label: Create test-specific dataset

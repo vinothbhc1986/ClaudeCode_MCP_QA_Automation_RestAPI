@@ -1,19 +1,19 @@
-const { defineConfig } = require('@playwright/test');
+import { defineConfig } from '@playwright/test';
 
-module.exports = defineConfig({
+export default defineConfig({
   testDir: './tests',
   timeout: 30000,
   expect: {
-    timeout: 10000,
+    timeout: 5000,
   },
   use: {
-    baseURL: process.env.BASE_URL || 'http://localhost:8082',
+    baseURL: 'http://localhost:8082',
     extraHTTPHeaders: {
       'Content-Type': 'application/json',
     },
   },
   reporter: [
-    ['html', { outputFolder: 'playwright-report' }],
+    ['html', { outputFolder: 'test-results' }],
     ['list'],
   ],
 });
